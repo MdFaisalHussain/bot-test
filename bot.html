@@ -1,0 +1,37 @@
+<!-- bot.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bot Simulator</title>
+</head>
+<body>
+  <h1>Simulated Bot Running...</h1>
+  <p>Open DevTools → Console to see logs.</p>
+
+  <script>
+    const targetUrl = 'https://yourusername.github.io/your-repo/index.html'; // CHANGE THIS
+    const totalRequests = 10;
+    const delay = 2000; // 2 seconds
+    let count = 0;
+
+    function simulateBotVisit() {
+      fetch(targetUrl, { mode: 'no-cors' })
+        .then(() => {
+          count++;
+          console.log(`Bot sent request #${count}`);
+          if (count < totalRequests) {
+            setTimeout(simulateBotVisit, delay);
+          } else {
+            console.log('Bot simulation complete.');
+          }
+        })
+        .catch(err => {
+          console.log("Fetch error (likely CORS):", err);
+        });
+    }
+
+    simulateBotVisit();
+  </script>
+</body>
+</html>
